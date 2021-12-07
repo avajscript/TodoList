@@ -282,7 +282,6 @@ window.addEventListener("DOMContentLoaded", () => {
     allTodos.forEach((todo, index) => {
       todo.id = index + 1;
     });
-    console.log(allTodos);
   }
   function getDaysSince(date) {
     return date.getTime() / 1000 / 60 / 60 / 24;
@@ -338,6 +337,10 @@ window.addEventListener("DOMContentLoaded", () => {
     resetAllTodosId();
   }
 
+  function generateTodoEditer(id, projectId) {
+    const div = document.createElement("div");
+  }
+
   // Render ids from current project
   function renderTodos(id) {
     const project = document.querySelector(".view-project");
@@ -372,7 +375,7 @@ window.addEventListener("DOMContentLoaded", () => {
         curTime = getHoursSince(curTime);
         todoTime = getHoursSince(todoItem.dueDate);
         dayHoursValue = Math.floor(todoTime - curTime);
-        console.log(dayHoursValue);
+
         if (dayHoursValue == 1) {
           dayHoursState = "Hour";
         }
@@ -404,6 +407,9 @@ window.addEventListener("DOMContentLoaded", () => {
       view.classList.add("view");
       view.innerText = "view";
 
+      view.addEventListener("click", (e) => {
+        generateTodoEditer(todoItem.id, todoItem.projectId);
+      });
       let clockLi = document.createElement("li");
       let clock = document.createElement("i");
       clock.classList.add("fas", "fa-clock");

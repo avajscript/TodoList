@@ -430,3 +430,42 @@ section.main-content {
   display: inline-block;
   margin-left: 1rem;
 }
+
+.todo-editor {
+  border: 2px solid black;
+  width: 80%;
+  height: 400px;
+  position: relative;
+}
+
+.todo-editor .editor-heading {
+  border: 3px solid black;
+  display: flex;
+}
+
+.todo-editor .editor-heading div {
+  flex: 1;
+}
+
+.todo-editor .editor-heading div:nth-of-type(1) {
+  flex-basis: 80%;
+}
+
+.todo-editor .editor-heading div:nth-of-type(2) {
+  display: flex;
+  justify-content: center;
+  border-left: 5px solid black;
+  cursor: pointer;
+}
+
+.todo-editor .editor-heading div:nth-of-type(2):hover {
+  background-color: #8d99ae;
+}
+
+.editor-content {
+  padding: 1rem;
+}
+
+.editor-content p {
+  font-size: 18px;
+}
