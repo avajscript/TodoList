@@ -1,0 +1,432 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arvo;
+  background-color: #edf2f4;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #ef233c;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex {
+  flex: 1;
+}
+
+.center {
+  text-align: center;
+}
+
+.icon-hover {
+  cursor: pointer;
+}
+
+.icon-hover i {
+  transition: color 0.5s ease;
+}
+
+.icon-hover:hover i {
+  color: #8d99ae;
+}
+
+.todo-item {
+  border: 2px solid #2b2d42;
+  background-color: #e5e5e5;
+  margin-bottom: 1rem;
+  padding: 10px;
+}
+
+.todo-item li {
+  display: inline-block;
+}
+
+.todo-item .left li {
+  margin-right: 0.75rem;
+}
+
+.todo-item .view {
+  border: 1px solid black;
+  padding: 0 10px;
+  border-radius: 0.25rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+.todo-item .view:hover {
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.todo-item .right li {
+  margin-left: 0.75rem;
+}
+
+.todo-check {
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 1.8rem;
+}
+
+header {
+  text-align: center;
+  line-height: 150px;
+  background-color: #2b2d42;
+}
+
+nav {
+  float: left;
+  background-color: #8d99ae;
+  width: 300px;
+  height: 100vh;
+  padding: 2rem;
+  border-right: 1px solid black;
+  z-index: 5;
+}
+
+nav li {
+  margin-bottom: 2rem;
+  display: block !important;
+  padding: 5px;
+}
+
+.date-list {
+  margin-bottom: 4rem;
+}
+
+.project-list h2.bold {
+  font-size: 2rem;
+}
+
+.project-list h2 {
+  font-size: 1.6rem;
+}
+
+.project-list li {
+  margin-bottom: 1rem;
+}
+
+.white-anim li {
+  transition: background 1s ease, padding 1s ease;
+  cursor: pointer;
+}
+
+.white-anim li h2 {
+  transition: margin 1s ease;
+  display: inline-block;
+}
+
+.white-bg, .active-slot {
+  background-color: white;
+}
+
+.padding-left, .active-slot {
+  padding-left: 20px;
+}
+
+#new-project {
+  cursor: pointer;
+  position: relative;
+  transition: padding 1s ease;
+}
+
+#new-project h2 {
+  display: inline-block;
+}
+
+#new-project i {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  opacity: 0;
+  transition: transform 1s ease-out, opacity 1s ease;
+}
+
+#new-project:hover {
+  padding-left: 10px;
+}
+
+#new-project:hover i {
+  opacity: 1;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.delete-project {
+  display: inline-block;
+}
+
+.project {
+  position: relative;
+}
+
+.project:hover i {
+  opacity: 1;
+}
+
+.project i {
+  opacity: 0;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 5px;
+  transition: opacity 1s ease;
+  border: 1px solid transparent;
+}
+
+.project i:hover {
+  background: #8d99ae;
+  border: 1px solid #2b2d42;
+}
+
+#new-todo-button {
+  margin-bottom: 1rem;
+  position: relative;
+  cursor: pointer;
+}
+
+#new-todo-button:hover i {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+#new-todo-button h2 {
+  display: inline-block;
+  font-size: 2rem;
+}
+
+#new-todo-button i {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 1s ease-out;
+  display: inline-block;
+}
+
+section.main-content {
+  margin-left: 300px;
+  padding: 3rem;
+  z-index: -1;
+}
+
+.new-todo-active {
+  left: 50vw !important;
+  transform: translateX(-50%);
+}
+
+.new-todo-form {
+  z-index: -1;
+  position: absolute;
+  left: -800px;
+  background-color: #8d99ae;
+  width: 800px;
+  height: 400px;
+  padding: 2rem;
+  border: 1px solid #2b2d42;
+  transition: left 2s ease, transform 2s ease;
+}
+
+.new-todo-form input {
+  height: 100%;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.new-todo-form input[type="date"] {
+  width: 50%;
+  border-radius: 0.5rem;
+}
+
+.new-todo-form .input-field {
+  margin-bottom: 1.5rem;
+}
+
+.new-todo-form .input-field .flex {
+  display: flex;
+  align-items: center;
+}
+
+.new-todo-form .input-field .flex i {
+  margin-right: 10px;
+}
+
+.new-todo-form textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  outline: none;
+  font-size: 16px;
+  border: 1px solid black;
+}
+
+.new-todo-form button {
+  font-family: Arva;
+  font-size: 1.8rem;
+  width: 110px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.new-todo-form button:active {
+  box-shadow: none !important;
+  bottom: 40px !important;
+}
+
+#new-todo-cancel {
+  color: #ef233c;
+  box-shadow: 0 5px #ef233c;
+  border: 1px solid #ef233c;
+  position: absolute;
+  bottom: 45px;
+  height: 33px;
+}
+
+#new-todo-submit {
+  color: #50c878;
+  box-shadow: 0 5px #50c878;
+  border: 1px solid #50c878;
+  position: absolute;
+  bottom: 45px;
+  right: 40px;
+  height: 33px;
+}
+
+.description {
+  height: 80px;
+}
+
+.invalid-input {
+  border: 2px solid #ef233c !important;
+}
+
+.view-project {
+  border: 3px solid #2b2d42;
+}
+
+.view-project header {
+  line-height: 50px;
+}
+
+.view-project h2 {
+  font-size: 2.4rem;
+  color: #ef233c;
+  font-weight: 700;
+}
+
+.project-content {
+  padding: 1rem;
+}
+
+#project-new-todo {
+  z-index: -2;
+  cursor: pointer;
+}
+
+#project-new-todo:hover {
+  color: #2b2d42;
+}
+
+#new-project-form {
+  background-color: #8d99ae;
+  width: 400px;
+  top: 198px;
+  padding: 2rem;
+  border: 1px solid #2b2d42;
+  position: absolute;
+  z-index: 4;
+  left: -400px;
+  transition: left 2s ease, transform 2s ease;
+}
+
+#new-project-form input {
+  height: 36px;
+  outline: none;
+  font-size: 22px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+#new-project-form button {
+  font-family: Arva;
+  font-size: 1.8rem;
+  width: 110px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+#new-project-form button:active {
+  box-shadow: none !important;
+  bottom: 40px !important;
+}
+
+#new-project-form .new-todo-buttons {
+  margin-top: 1rem;
+}
+
+#new-project-submit {
+  color: #50c878;
+  box-shadow: 0 5px #50c878;
+  border: 1px solid #50c878;
+}
+
+#new-project-cancel {
+  color: #ef233c;
+  box-shadow: 0 5px #ef233c;
+  border: 1px solid #ef233c;
+}
+
+#new-todo-project-title {
+  color: #ef233c;
+  background-color: #2b2d42;
+}
+
+.view-timeslot {
+  position: absolute;
+  z-index: -5;
+  width: 60%;
+  max-width: 1200px;
+}
+
+.view-timeslot h2 {
+  color: #ef233c;
+  font-size: 2.4rem;
+}
+
+.date-holder {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.date-holder h2 {
+  display: inline-block;
+}
+
+.date-holder p {
+  display: inline-block;
+  margin-left: 1rem;
+}
