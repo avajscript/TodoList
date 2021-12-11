@@ -21,6 +21,8 @@
   </head>
   <body>
     <main>
+      <div style="display: none" class="content-block"></div>
+
       <header class="main-header">
         <h1>TODO LIST</h1>
       </header>
@@ -58,23 +60,25 @@
       <!-- End of nav -->
 
       <section class="main-content">
-        <div class="todo-editor">
+        <div style="display: none" class="todo-editor">
           <div class="editor-heading">
             <div>
-              <h2>Wash the dishes</h2>
+              <input id="edit-title" type="text" />
             </div>
             <div class="close-editor">
               <i class="fas fa-2x fa-times"></i>
             </div>
           </div>
           <div class="editor-content">
-            <p>
-              The dishes must be cleaned before the dishes inspector comes for
-              his weekly inspection. If you do not pass with flying colors, the
-              pidgeons will attack.
-            </p>
+            <textarea id="edit-description"></textarea>
           </div>
+          <div class="date-holder">
+            <h3>Date</h3>
+            <input id="edit-date" type="date" />
+          </div>
+          <button id="edit-confirm">Confirm</button>
         </div>
+        <!-- End of todo editor-->
 
         <div id="new-project-form">
           <div class="flex-container">
@@ -169,6 +173,8 @@
         </div>
         <!-- end of new todo form -->
       </section>
+
+      <!-- End of content block-->
       <!-- End of main section -->
     </main>
   </body>

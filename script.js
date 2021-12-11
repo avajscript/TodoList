@@ -16,7 +16,8 @@ window.addEventListener("DOMContentLoaded", () => {
     newProjectSubmit = document.querySelector("#new-project-submit"),
     viewTodayButton = document.querySelector("#render-today"),
     viewWeekButton = document.querySelector("#render-week"),
-    viewAllButton = document.querySelector("#render-all");
+    viewAllButton = document.querySelector("#render-all"),
+    todoEditor = document.querySelector(".todo-editor");
   class TODO {
     constructor(title, description, dueDate, time, id, projectId) {
       this.title = title;
@@ -337,10 +338,20 @@ window.addEventListener("DOMContentLoaded", () => {
     resetAllTodosId();
   }
 
-  function generateTodoEditer(id, projectId) {
-    const div = document.createElement("div");
-  }
+  function renderEditTodo(todo) {
+    todoEditor.style.display = "block";
+    const title = document.getElementById("edit-title"),
+      para = document.getElementById("edit-description"),
+      date = document.getElementById("edit-date"),
+      closeBtn = document.querySelector(".close-editor"),
+      confirmBtn = document.getElementById("edit-confirm");
 
+    title.value = todo.title;
+    para.value = todo.description;
+    date.value = `${todo.dueDate.getFullYear()}-${
+      todo.dueDate.getMonth() + 1
+    }-${todo.dueDate.getDate()}`;
+  }
   // Render ids from current project
   function renderTodos(id) {
     const project = document.querySelector(".view-project");
@@ -406,10 +417,10 @@ window.addEventListener("DOMContentLoaded", () => {
       let view = document.createElement("li");
       view.classList.add("view");
       view.innerText = "view";
-
-      view.addEventListener("click", (e) => {
-        generateTodoEditer(todoItem.id, todoItem.projectId);
+      view.addEventListener("click", () => {
+        renderEditTodo(todoItem);
       });
+
       let clockLi = document.createElement("li");
       let clock = document.createElement("i");
       clock.classList.add("fas", "fa-clock");
