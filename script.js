@@ -337,20 +337,100 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     resetAllTodosId();
   }
+  function checkEditDate(date, time){
+    console.log(Date);
+    let validDate = true,
+      projectId = document.querySelector(".view-project");
+    let userDate = date.value.split("-");
+    let userTime = time.value.split(":");
+
+    userDate = new Date(
+      userDate[0],
+      userDate[1] - 1,
+      userDate[2],
+      userTime[0],
+      userTime[1],
+      0
+    );
+    const curDate = new Date();
+
+    // Check current time in milliseconds compared to user entered time to see if the date is in the future
+
+    const userDateMil = userDate.getTime(),
+      curDateMil = curDate.getTime();
+
+    const timeDif = userDateMil - curDateMil;
+
+    dateInput.classList.remove("invalid-input");
+    timeInput.classList.remove("invalid-input");
+    // Check if user time is one minute or less than the current timecode
+    if (timeDif <= 60000) {
+      // if day of user input day of month less than current day of month
+      if (userDate.getDate() < curDate.getDate()) {
+        dateInput.classList.add("invalid-input");
+        validDate = false;
+      } else {
+        timeInput.classList.add("invalid-input");
+        validDate = false;
+      }
+    } else {
+      validDate = true;
+    }
+
+    if (validDate == true) {
+      // Create project todo
+      if (checkIfProject()) {
+        // If the date is correct and is project
+
+        projectId = projectId.id;
+        projectId = projectId.match(/[0-9]+/g);
+        createTodo(title, description, userDate, userTime, projectId);
+        renderProject(projectId);
+
+        // Create base todo
+      } else {
+        createTodo(title, description, userDate, userTime);
+
+        //renderTodos(projectId);
+      }
+  }
+  function editTodo(todo, title, para, date, time) {
+    todo.title = title.value;
+    todo.description = para.value;
+
+    date = date.value.split("-");
+    let year = date.shift();
+    date.push(year);
+    todo.dueDate = new Date(date);
+
+    todo.time = time.value.split(":");
+    
+    checkEditDate(date, time);
+  }
 
   function renderEditTodo(todo) {
     todoEditor.style.display = "block";
     const title = document.getElementById("edit-title"),
       para = document.getElementById("edit-description"),
       date = document.getElementById("edit-date"),
+      time = document.getElementById("edit-time"),
       closeBtn = document.querySelector(".close-editor"),
       confirmBtn = document.getElementById("edit-confirm");
 
     title.value = todo.title;
     para.value = todo.description;
+    time.value = todo.time.join(":");
+
     date.value = `${todo.dueDate.getFullYear()}-${
       todo.dueDate.getMonth() + 1
     }-${todo.dueDate.getDate()}`;
+
+    closeBtn.addEventListener("click", () => {
+      todoEditor.style.display = "none";
+    });
+    confirmBtn.addEventListener("click", () => {
+      editTodo(todo, title, para, date, time);
+    });
   }
   // Render ids from current project
   function renderTodos(id) {
@@ -417,9 +497,6 @@ window.addEventListener("DOMContentLoaded", () => {
       let view = document.createElement("li");
       view.classList.add("view");
       view.innerText = "view";
-      view.addEventListener("click", () => {
-        renderEditTodo(todoItem);
-      });
 
       let clockLi = document.createElement("li");
       let clock = document.createElement("i");
@@ -436,6 +513,9 @@ window.addEventListener("DOMContentLoaded", () => {
       editLi.classList.add("icon-hover");
       let edit = document.createElement("i");
       edit.classList.add("fas", "fa-edit");
+      edit.addEventListener("click", () => {
+        renderEditTodo(todoItem);
+      });
       editLi.appendChild(edit);
 
       let deleteLi = document.createElement("li");
