@@ -26,6 +26,7 @@ window.addEventListener("DOMContentLoaded", () => {
       this.time = time;
       this.id = id;
       this.projectId = projectId;
+      this.checked = false;
     }
   }
 
@@ -337,8 +338,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     resetAllTodosId();
   }
-  function checkEditDate(date, time){
-    console.log(Date);
+  function checkEditDate(date, time) {
     let validDate = true,
       projectId = document.querySelector(".view-project");
     let userDate = date.value.split("-");
@@ -361,16 +361,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const timeDif = userDateMil - curDateMil;
 
-    dateInput.classList.remove("invalid-input");
-    timeInput.classList.remove("invalid-input");
+    date.classList.remove("edit-invalid-input");
+    time.classList.remove("edit-invalid-input");
     // Check if user time is one minute or less than the current timecode
     if (timeDif <= 60000) {
       // if day of user input day of month less than current day of month
       if (userDate.getDate() < curDate.getDate()) {
-        dateInput.classList.add("invalid-input");
+        date.classList.add("edit-invalid-input");
         validDate = false;
       } else {
-        timeInput.classList.add("invalid-input");
+        time.classList.add("edit-invalid-input");
         validDate = false;
       }
     } else {
@@ -384,27 +384,22 @@ window.addEventListener("DOMContentLoaded", () => {
 
         projectId = projectId.id;
         projectId = projectId.match(/[0-9]+/g);
-        createTodo(title, description, userDate, userTime, projectId);
+        document.querySelector(".todo-editor").style.display = "none";
         renderProject(projectId);
-
-        // Create base todo
-      } else {
-        createTodo(title, description, userDate, userTime);
-
-        //renderTodos(projectId);
       }
+    }
   }
   function editTodo(todo, title, para, date, time) {
     todo.title = title.value;
     todo.description = para.value;
 
-    date = date.value.split("-");
-    let year = date.shift();
-    date.push(year);
-    todo.dueDate = new Date(date);
+    let newDate = date.value.split("-");
+    let year = newDate.shift();
+    newDate.push(year);
+    todo.dueDate = new Date(newDate);
 
     todo.time = time.value.split(":");
-    
+
     checkEditDate(date, time);
   }
 
@@ -432,6 +427,18 @@ window.addEventListener("DOMContentLoaded", () => {
       editTodo(todo, title, para, date, time);
     });
   }
+
+  function toggleCheck(check, todo) {
+    if (!todo.checked) {
+      todo.checked = true;
+      check.classList.remove("fa-square");
+      check.classList.add("fa-check-square");
+    } else {
+      todo.checked = false;
+      check.classList.remove("fa-check-square");
+      check.classList.add("fa-square");
+    }
+  }
   // Render ids from current project
   function renderTodos(id) {
     const project = document.querySelector(".view-project");
@@ -456,6 +463,9 @@ window.addEventListener("DOMContentLoaded", () => {
       let checkLi = document.createElement("li");
       let check = document.createElement("i");
       check.classList.add("far", "fa-lg", "fa-square", "todo-check");
+      check.addEventListener("click", (e) => {
+        toggleCheck(e.currentTarget, todoItem);
+      });
       checkLi.appendChild(check);
 
       // Check days left

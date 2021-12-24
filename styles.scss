@@ -325,6 +325,12 @@ section.main-content {
 .invalid-input {
   border: 2px solid $red !important;
 }
+.edit-invalid-input {
+  border: 2px solid $black;
+}
+.fa-check-square {
+  font-weight: bold;
+}
 
 .view-project {
   border: 3px solid $black;
@@ -488,6 +494,12 @@ section.main-content {
   h3 {
     font-size: 1.4rem;
   }
+}
+
+.time-holder {
+  @extend .date-holder;
+  top: 65%;
+  background-color: $green;
 }
 
 #edit-confirm {
