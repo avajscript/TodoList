@@ -508,7 +508,7 @@ section.main-content {
   background-color: #8d99ae;
 }
 
-.date-holder, .time-holder {
+.edit-date-holder {
   position: absolute;
   top: 50%;
   transform: translatey(50%);
@@ -518,7 +518,7 @@ section.main-content {
   left: calc(0% + 1rem);
 }
 
-.date-holder h3, .time-holder h3 {
+.edit-date-holder h3 {
   font-size: 1.4rem;
 }
 
